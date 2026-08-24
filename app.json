@@ -1,0 +1,102 @@
+{
+  "expo": {
+    "name": "Khairiyat",
+    "slug": "khairiyat",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "userInterfaceStyle": "automatic",
+    "icon": "./assets/khairiyat_app_logo.png",
+    "scheme": "khairiyat",
+    "newArchEnabled": true,
+    "android": {
+      "package": "com.khairiyat.app",
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/khairiyat_app_logo.png",
+        "backgroundColor": "#FAF9F5"
+      },
+      "intentFilters": [
+        {
+          "action": "VIEW",
+          "autoVerify": false,
+          "data": [
+            {
+              "scheme": "khairiyat",
+              "host": "t"
+            }
+          ],
+          "category": [
+            "BROWSABLE",
+            "DEFAULT"
+          ]
+        }
+      ],
+      "permissions": [
+        "android.permission.CAMERA",
+        "android.permission.RECORD_AUDIO",
+        "android.permission.NFC"
+      ]
+    },
+    "plugins": [
+      "./plugins/withNfcIntentFilter",
+      "expo-router",
+      "expo-dev-client",
+      "expo-font",
+      [
+        "expo-camera",
+        {
+          "cameraPermission": "Khairiyat uses the camera to scan the QR code on a pill box sticker."
+        }
+      ],
+      [
+        "expo-notifications",
+        {
+          "color": "#2F6B4F"
+        }
+      ],
+      [
+        "react-native-nfc-manager",
+        {
+          "nfcPermission": "Khairiyat reads the NFC sticker on a pill box to confirm a dose."
+        }
+      ],
+      [
+        "react-native-android-widget",
+        {
+          "widgets": [
+            {
+              "name": "Today",
+              "label": "Khairiyat · Today",
+              "minWidth": "180dp",
+              "minHeight": "80dp",
+              "targetCellWidth": 4,
+              "targetCellHeight": 2,
+              "description": "Today's doses at a glance",
+              "resizeMode": "horizontal|vertical",
+              "updatePeriodMillis": 1800000
+            },
+            {
+              "name": "Scan",
+              "label": "Khairiyat · Scan",
+              "minWidth": "80dp",
+              "minHeight": "80dp",
+              "targetCellWidth": 1,
+              "targetCellHeight": 1,
+              "description": "Open the pill box scanner",
+              "resizeMode": "none",
+              "updatePeriodMillis": 0
+            }
+          ]
+        }
+      ]
+    ],
+    "experiments": {
+      "typedRoutes": true
+    },
+    "extra": {
+      "router": {},
+      "eas": {
+        "projectId": "04641f11-8ae9-43a3-8210-41be804f285d"
+      }
+    }
+  }
+}

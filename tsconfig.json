@@ -1,0 +1,18 @@
+{
+  "extends": "expo/tsconfig.base",
+  "compilerOptions": {
+    "strict": true,
+    "noUncheckedIndexedAccess": true,
+    // Tests run through Node's built-in runner with type stripping, which
+    // requires explicit .ts specifiers. Safe here because we only typecheck.
+    "allowImportingTsExtensions": true,
+    "types": ["node"],
+    "paths": {
+      "@/*": ["./*"]
+    }
+  },
+  "include": ["**/*.ts", "**/*.tsx", ".expo/types/**/*.ts", "expo-env.d.ts"],
+  // Edge Functions run on Deno, not React Native — they have their own globals
+  // and jsr: imports, so they are typechecked by the Supabase CLI, not here.
+  "exclude": ["node_modules", ".khai-tmp", "supabase/functions"]
+}

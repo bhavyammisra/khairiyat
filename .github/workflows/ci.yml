@@ -1,0 +1,36 @@
+name: CI
+
+# The tests already existed; nothing enforced them. This does.
+#
+# Deliberately does NOT build the APK. An EAS build takes ~15 minutes, needs
+# credentials, and is the one thing a green tick here cannot promise anyway —
+# NFC is only ever verified on a physical Android phone.
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          # 24 is not optional. The suite runs TypeScript through Node's own
+          # type stripping and mocks AsyncStorage with node:test module mocks;
+          # both, plus the resolver hook in scripts/, need a recent runtime.
+          node-version: 24
+          cache: npm
+
+      - name: Install
+        run: npm ci
+
+      - name: Typecheck
+        run: npm run typecheck
+
+      - name: Test
+        run: npm test
